@@ -1,18 +1,41 @@
-{% load static %}
+{% load static%}
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8" />
-    <title>{% block title %}My shop{% endblock %}</title>
-    <link href="{% static "css/base.css" %}" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>
+      Thrift Shop |
+      {% block title %}
+        
+      {% endblock title %}
+        
+    </title>
+    <link rel="stylesheet" href="{%static 'shop/css/main.css'%}">
   </head>
   <body>
-    <div id="header">
-      <a href="/" class="logo">My shop</a>
-    </div>
-    <div id="subheader">
-      <div class="cart">Your cart is empty.</div>
-    </div>
-    <div id="content">{% block content %} {% endblock %}</div>
+    <section class="top-section">
+      <header>
+        <nav>
+          <div class="logo">
+              <a href="{% url 'shop:product_list'%}"><h1>Thrift Shop</h1></a>
+          </div>
+          <div class="cart">
+            Your Cart is empty
+          </div>
+        </nav>
+        <div class="links">
+        </div>
+      </header>
+    </section>
+    <section class="main">
+      
+      {% block body %}
+        
+      {% endblock body %}
+        
+    </section>
+    <script src="{% static 'shp/js/index.js'%}">
+
+    </script>
   </body>
 </html>

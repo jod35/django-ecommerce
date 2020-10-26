@@ -1,46 +1,34 @@
-{% extends "shop/base.html" %}
-{% load static %}
-{% block title %}
-{% if category %}{{ category.name }}{% else %}Products{% endif %}
-{% endblock %}
-{% block content %}
-<div id="sidebar">
-        <h3>Categories</h3>
-        <ul>
-                <li {% if not category %}class="selected"{% endif %}>
-                <a href="{% url 'shop:product_list' %}">All</a>
-                </li>
-                {% for c in categories %}
-                    <li 
-                        {% if category.slug == c.slug %}
-                            class="selected"
-                        {% endif %}>
-                        <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-                    </li>
-                {% endfor %}
-        </ul>
-    </div>
-    <div id="main" class="product-list">
-        <h1>{% if category %}
-                {{ category.name }}
-            {% else %}
-                Products
-            {% endif %}
-        </h1>
-        {% for product in products %}
-            <div class="item">
-                <a href="{{ product.get_absolute_url }}">
-                <img src="{% if product.image %}
-                    {{ product.image.url }}
-                    {%else %}
-                    {% static 'img/no_image.png' %}
-                    {% endif %}">
-                </a>
-                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-                <br>
-                ${{ product.price }}
-            </div>
+{% extends 'shop/base.html' %}
 
-        {% endfor %}
-</div>
-{% endblock %}
+{% block title %}
+        Product List
+{% endblock title %}
+
+{% block body %}
+    <div class="main">
+        <div class="sidebar">
+            {% for c in categories %}
+                <a href="">{{c.name}}</a>
+            {% endfor %}
+        </div>
+        <div class="left">
+            
+            {% for p in products %}
+                <div class="product">
+                    
+                    {% if p.image %}
+                    <img src="{{p.image.url}}" alt="Image" class="product-img" width="200">
+                    {% endif %}
+                    <br>
+                    <h3>{{p.name}}</h3>
+                    <br>
+                    <p>$ {{p.price}}</p>
+                        
+                </div>
+            {% endfor %}
+                
+        </div>
+    </div>
+{% endblock body %}
+    
+    
